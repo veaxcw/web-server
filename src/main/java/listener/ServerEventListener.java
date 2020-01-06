@@ -1,5 +1,6 @@
 package listener;
 
+import http.HttpResponseDataBuilder;
 import lombok.Data;
 
 import java.io.*;
@@ -9,7 +10,7 @@ import java.net.Socket;
  * @author chengwei
  */
 @Data
-public class ServerEventListener implements Runnable {
+public class ServerEventListener  implements Runnable,WebSocketListener {
 
     private Socket client;
 
@@ -56,4 +57,8 @@ public class ServerEventListener implements Runnable {
     }
 
 
+    @Override
+    public HttpResponseDataBuilder onHttpRequestReceived(Socket conn) {
+        return null;
+    }
 }

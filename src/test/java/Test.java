@@ -1,14 +1,16 @@
 import config.ServerConfig;
 import org.dom4j.DocumentException;
-import servlet.ServerSocketLaunch;
+import server.BIOServerSocket;
+
+import java.net.UnknownHostException;
 
 public class Test {
     public static void main(String[] args) {
 
         try {
             ServerConfig serverConfig = new ServerConfig();
-            ServerSocketLaunch server = new ServerSocketLaunch(serverConfig);
-        } catch (DocumentException e) {
+            BIOServerSocket server = new BIOServerSocket(serverConfig);
+        } catch (DocumentException | UnknownHostException e) {
             e.printStackTrace();
         }
 

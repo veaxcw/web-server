@@ -5,6 +5,10 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import utils.Constants;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * @author chengwei
@@ -16,13 +20,15 @@ public class ServerConfig {
 
     private String host;
 
+    private String protocol;
 
-    public ServerConfig() throws DocumentException {
+
+    public ServerConfig() throws DocumentException, UnknownHostException {
         init();
     }
 
 
-    private void init() throws DocumentException {
+    private void init() throws DocumentException, UnknownHostException {
 
         SAXReader reader = new SAXReader();
 
@@ -30,9 +36,13 @@ public class ServerConfig {
 
         Element root = document.getRootElement();
 
-        this.port = Integer.valueOf(root.attribute("port").getValue());
+        Element connector = root.element(Constants.CONNECTOR);
 
-        this.host = root.attributeValue("host");
+        this.port = Integer.valueOf(connector.attribute(Constants.PORT).getValue());
+
+        this.protocol = connector.attribute(Constants.PROTOCOL).getValue();
+
+        this.host = InetAddress.getLocalHost().getHostAddress();
 
 
     }

@@ -14,22 +14,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadPool {
 
-
-
     public static ThreadPoolExecutor getThreadPool() {
-        /**
-         * 线程池大小
-         */
-        int corePoolSize = 10;
-        /**
-         * 线程池最大大小
-         */
+        // 线程池大小
+        int corePoolSize = Runtime.getRuntime().availableProcessors();
+        // 线程池最大大小
         int maxPoolSize = 100;
-        /**
-         * 线程活动保持时间
-         */
-        long keepAliveTime = 100;
-
+        // 线程活动保持时间
+        long keepAliveTime = 10000;
+        // 线程活动保持时间
         ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("socket-connection-%d").build();
 
         return new ThreadPoolExecutor(
